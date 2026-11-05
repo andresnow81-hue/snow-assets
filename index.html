@@ -169,8 +169,8 @@ Cuidados (termos proibidos, regras do fornecedor): </textarea></div>
 </div>
 
 <script>
-/* CONFIGURAÇÃO: troque pelo endereço gerado pelo FormSubmit para o e-mail do quadro MARKETING no Trello */
-window.BVD_CFG={endpoint:"https://formsubmit.co/ajax/EMAIL_DO_QUADRO_TRELLO",ccVerba:"andre@bvgroup.com.br"};
+/* CONFIGURAÇÃO: URL do App da Web do Google Apps Script (termina em /exec) */
+window.BVD_CFG={endpoint:"COLE_AQUI_A_URL_DO_APPS_SCRIPT"};
 </script>
 <script>
 (function(){
@@ -221,25 +221,15 @@ window.BVD_CFG={endpoint:"https://formsubmit.co/ajax/EMAIL_DO_QUADRO_TRELLO",ccV
     enviando=true;$("#bvd-enviar").disabled=true;status("Enviando…");
     var fim=function(){enviando=false;$("#bvd-enviar").disabled=false};
     var ok=function(r){fim();f.hidden=true;$("#bvd-done").hidden=false;
-      $("#bvd-done-txt").textContent='"'+data.titulo+'" foi enviado. Em instantes ele aparece no Trello do Marketing, na lista Novas Solicitações.';
+      $("#bvd-done-txt").textContent='"'+data.titulo+'" já está no Trello do Marketing, na lista Novas Solicitações.';
       var a=$("#bvd-card");if(r&&r.url&&/^https:\/\/trello\.com\//.test(r.url)){a.href=r.url;a.hidden=false}else{a.hidden=true}
       status("");root.scrollIntoView({behavior:"smooth",block:"start"})};
     if(CFG.demo){setTimeout(function(){ok({})},600);return}
-    var LBL={"Snow":"SNOW","Primus":"PRIMUS","Azul Viagens":"AZUL_VIAGENS","BV Group":"BV_GROUP"};
-    var tags=data.empresas.map(function(e){return "#"+LBL[e]});if(data.urgente)tags.push("#PRIORIDADE");
-    var assunto="["+data.empresas.join(" + ").toUpperCase()+"] "+data.titulo+(data.verba!=="Não"?" · VERBA (aprovação André)":"")+" "+tags.join(" ");
-    var body={"_subject":assunto,"_template":"table","_captcha":"false","_honey":data.site,
-      "Mensagem principal":data.mensagem,"Empresa":data.empresas.join(", "),"Tipo":data.tipo,"Peças":data.pecas.join(", "),
-      "Comunicação":data.comunicacao,"Objetivo":data.objetivo,"Prazo para entrega":br(data.prazo)};
-    if(data.urgente)body["URGENTE"]=data.urgencia;
-    body["Verba / fornecedor externo"]=data.verba;body["Informações obrigatórias"]=data.infos;
-    if(data.anexos)body["Anexos"]=data.anexos;
-    body["Pedido por"]=data.nome+" ("+data.email+")";
-    if(data.verba!=="Não"&&CFG.ccVerba)body["_cc"]=CFG.ccVerba;
+    if(!/^https:\/\/script\.google\.com\//.test(CFG.endpoint||"")){fim();status("O formulário ainda não foi ligado ao Trello. Avise o André.",true);return}
     var ctrl=typeof AbortController!=="undefined"?new AbortController():null;var t=setTimeout(function(){if(ctrl)ctrl.abort()},20000);
-    fetch(CFG.endpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(body),signal:ctrl?ctrl.signal:undefined})
-      .then(function(res){return res.json().catch(function(){return {}}).then(function(j){return {ok:res.ok,j:j}})})
-      .then(function(r){clearTimeout(t);if(r.ok&&r.j&&(r.j.success===true||r.j.success==="true")){ok({})}else{fim();status("Não foi possível enviar agora. Tente de novo em instantes.",true)}})
+    fetch(CFG.endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data),signal:ctrl?ctrl.signal:undefined,redirect:"follow"})
+      .then(function(res){return res.json().then(function(j){return {ok:res.ok,j:j}})})
+      .then(function(r){clearTimeout(t);if(r.ok&&r.j&&r.j.ok){ok(r.j)}else{fim();status((r.j&&r.j.message)||"Não foi possível enviar agora. Tente de novo em instantes.",true)}})
       .catch(function(){clearTimeout(t);fim();status("Não foi possível enviar. Confira a conexão e tente de novo.",true)});
   });
   $("#bvd-novo").addEventListener("click",function(){f.reset();$("#bvd-infos").value=infosPadrao;f.hidden=false;$("#bvd-done").hidden=true;atualiza()});
