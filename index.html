@@ -225,7 +225,7 @@ window.BVD_CFG={endpoint:"https://script.google.com/macros/s/AKfycbxl6f1yewD38Ay
       var a=$("#bvd-card");if(r&&r.url&&/^https:\/\/trello\.com\//.test(r.url)){a.href=r.url;a.hidden=false}else{a.hidden=true}
       status("");root.scrollIntoView({behavior:"smooth",block:"start"})};
     if(CFG.demo){setTimeout(function(){ok({})},600);return}
-    if(!/^https:\/\/script\.google\.com\//.test(CFG.endpoint||"")){fim();status("O formulário ainda não foi ligado ao Trello. Avise o André.",true);return}
+    if(!/^https:\/\/script\.google\.com\//.test(CFG.endpoint||"")){fim();status("Esta é uma versão antiga da página. Recarregue (Ctrl+Shift+R) e envie de novo.",true);return}
     var ctrl=typeof AbortController!=="undefined"?new AbortController():null;var t=setTimeout(function(){if(ctrl)ctrl.abort()},20000);
     fetch(CFG.endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data),signal:ctrl?ctrl.signal:undefined,redirect:"follow"})
       .then(function(res){return res.json().then(function(j){return {ok:res.ok,j:j}})})
