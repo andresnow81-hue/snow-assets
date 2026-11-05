@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Abertura demanda Marketing · BV Group</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="logo-bv-group.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>body{margin:0;background:#f3f5f9;padding:16px 0}
+/* Abertura demanda Marketing · BV Group. Visual claro e fixo, independente do tema do WordPress. */
+.bvd{--bg:#f3f5f9;--surface:#fff;--ink:#14203a;--muted:#5b6880;--line:#d8dfeb;--accent:#2446d8;--accent-soft:#e7ecfd;--ok:#1f7a4d;--ok-soft:#e3f4ea;--warn:#a85a00;--warn-soft:#fdf0dc;--err:#b42318;
+  --fd:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--fb:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  max-width:760px;margin:0 auto;padding:24px 16px 48px;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--fb);border-radius:18px;box-sizing:border-box}
+.bvd *,.bvd *::before,.bvd *::after{box-sizing:border-box}
+.bvd h1,.bvd h2{font-family:var(--fd);margin:0;line-height:1.15;color:var(--ink);text-wrap:balance}
+.bvd h1{font-size:clamp(28px,5vw,38px);font-weight:800;letter-spacing:-.02em}
+.bvd h2{font-size:22px;font-weight:700}
+.bvd p{margin:0}
+.bvd-head{display:flex;gap:22px;align-items:center;margin-bottom:24px}
+.bvd-logo{width:88px;height:auto;flex:0 0 auto}
+.bvd-head-txt{display:flex;flex-direction:column;gap:8px;min-width:0}
+.bvd-sub{color:var(--muted);font-size:17px}
+.bvd-prazos{display:flex;flex-wrap:wrap;gap:8px}
+.bvd-prazos span{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+.bvd form{display:flex;flex-direction:column;gap:16px;margin:0}
+.bvd-block{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:20px;margin:0;display:flex;flex-direction:column;gap:20px;min-width:0}
+.bvd-block legend{float:left;width:100%;padding:0;font-family:var(--fd);font-size:20px;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.bvd-n{font:600 13px/1 ui-monospace,Menlo,monospace;color:var(--accent)}
+.bvd-q{display:flex;flex-direction:column;gap:8px;min-width:0}
+.bvd-lbl{font-weight:700;font-size:15px}
+.bvd-lbl i{color:var(--err);font-style:normal}
+.bvd-hint{font-size:13px;color:var(--muted)}
+.bvd-row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bvd input[type=text],.bvd input[type=email],.bvd input[type=date],.bvd input[type=url],.bvd textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:0;box-shadow:none}
+.bvd textarea{min-height:96px;resize:vertical}
+.bvd textarea.bvd-tall{min-height:170px}
+.bvd input:focus-visible,.bvd textarea:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.bvd-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bvd-chip{position:relative;margin:0}
+.bvd-chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;width:100%;height:100%}
+.bvd-chip span{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--bg);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;transition:background .12s,border-color .12s,color .12s;user-select:none;color:var(--ink)}
+.bvd-chip input:checked+span{background:var(--c,var(--accent));border-color:var(--c,var(--accent));color:#fff}
+.bvd-chip input:focus-visible+span{box-shadow:0 0 0 3px var(--accent-soft)}
+.bvd-co span{padding:12px 18px;font-size:16px;font-family:var(--fd)}
+.bvd-co span::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+.bvd-co input:checked+span::before{background:#fff}
+.bvd-urg{background:var(--warn-soft);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.bvd-urg .bvd-lbl{color:var(--warn)}
+.bvd-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.bvd-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bvd button{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:12px;padding:14px 26px;background:var(--accent);color:#fff;cursor:pointer;line-height:1.2}
+.bvd button:disabled{opacity:.5;cursor:not-allowed}
+.bvd button:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.bvd button.bvd-ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.bvd-status{font-size:14px;color:var(--muted)}
+.bvd-status.bvd-err{color:var(--err);font-weight:600}
+.bvd-done{background:var(--ok-soft);border:1px solid #9fd3b6;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.bvd-done h2{color:var(--ok)}
+.bvd-done a{color:var(--accent);font-weight:600}
+.bvd [hidden]{display:none!important}
+@media (max-width:560px){.bvd-row2{grid-template-columns:1fr}.bvd-head{gap:14px}.bvd-logo{width:64px}}
+@media (prefers-reduced-motion:reduce){.bvd *{transition:none!important}}
+</style></head>
+<body>
+<div id="bvd" class="bvd">
+  <header class="bvd-head">
+    <img class="bvd-logo" src="logo-bv-group.png" alt="BV Group" width="120" height="143">
+    <div class="bvd-head-txt">
+      <h1>Abertura demanda Marketing</h1>
+      <p class="bvd-sub">Cada pedido vira um card no Trello do Marketing.</p>
+      <div class="bvd-prazos" aria-label="Prazos mínimos em dias úteis">
+        <span>Ajuste ou peça simples: <b>2 dias úteis</b></span>
+        <span>Peça média: <b>5 dias úteis</b></span>
+        <span>Campanha ou evento: <b>10 dias úteis</b></span>
+      </div>
+    </div>
+  </header>
+
+  <form id="bvd-form" novalidate>
+    <fieldset class="bvd-block">
+      <legend><span class="bvd-n">1</span> Quem pede</legend>
+      <div class="bvd-q">
+        <span class="bvd-lbl" id="bvd-l-empresa">Empresa <i>*</i></span>
+        <span class="bvd-hint">Pode marcar mais de uma.</span>
+        <div class="bvd-chips" role="group" aria-labelledby="bvd-l-empresa">
+          <label class="bvd-chip bvd-co" style="--c:#e8730c"><input type="checkbox" name="empresas" id="bvd-emp-snow" value="Snow"><span>Snow</span></label>
+          <label class="bvd-chip bvd-co" style="--c:#1f7a5c"><input type="checkbox" name="empresas" id="bvd-emp-primus" value="Primus"><span>Primus</span></label>
+          <label class="bvd-chip bvd-co" style="--c:#0b86c4"><input type="checkbox" name="empresas" id="bvd-emp-azul" value="Azul Viagens"><span>Azul Viagens</span></label>
+          <label class="bvd-chip bvd-co" style="--c:#6d3fc7"><input type="checkbox" name="empresas" id="bvd-emp-bv" value="BV Group"><span>BV Group</span></label>
+        </div>
+      </div>
+      <div class="bvd-row2">
+        <div class="bvd-q"><label class="bvd-lbl" for="bvd-nome">Nome <i>*</i></label><input type="text" id="bvd-nome" name="nome" autocomplete="name"></div>
+        <div class="bvd-q"><label class="bvd-lbl" for="bvd-email">E-mail <i>*</i></label><input type="email" id="bvd-email" name="email" autocomplete="email" placeholder="nome@bvgroup.com.br"></div>
+      </div>
+    </fieldset>
+
+    <fieldset class="bvd-block">
+      <legend><span class="bvd-n">2</span> O que precisa</legend>
+      <div class="bvd-q"><label class="bvd-lbl" for="bvd-titulo">Título do pedido <i>*</i></label><input type="text" id="bvd-titulo" name="titulo" maxlength="120" placeholder="Ex.: Promoção Bariloche julho 2027"></div>
+      <div class="bvd-q">
+        <span class="bvd-lbl" id="bvd-l-tipo">Tipo <i>*</i></span>
+        <div class="bvd-chips" role="radiogroup" aria-labelledby="bvd-l-tipo">
+          <label class="bvd-chip"><input type="radio" name="tipo" id="bvd-tipo-nova" value="Peça nova"><span>Peça nova</span></label>
+          <label class="bvd-chip"><input type="radio" name="tipo" id="bvd-tipo-ajuste" value="Ajuste em peça existente"><span>Ajuste em peça existente</span></label>
+          <label class="bvd-chip"><input type="radio" name="tipo" id="bvd-tipo-campanha" value="Campanha ou ação"><span>Campanha ou ação (várias peças)</span></label>
+        </div>
+      </div>
+      <div class="bvd-q">
+        <span class="bvd-lbl" id="bvd-l-pecas">Peças e canais <i>*</i></span>
+        <span class="bvd-hint">Marque todas. Formatos e tamanhos o marketing resolve.</span>
+        <div class="bvd-chips" role="group" aria-labelledby="bvd-l-pecas" id="bvd-pecas"></div>
+      </div>
+      <div class="bvd-row2">
+        <div class="bvd-q">
+          <span class="bvd-lbl" id="bvd-l-com">Comunicação <i>*</i></span>
+          <div class="bvd-chips" role="radiogroup" aria-labelledby="bvd-l-com">
+            <label class="bvd-chip"><input type="radio" name="comunicacao" id="bvd-com-cliente" value="Cliente"><span>Cliente</span></label>
+            <label class="bvd-chip"><input type="radio" name="comunicacao" id="bvd-com-interna" value="Interna"><span>Interna</span></label>
+          </div>
+        </div>
+        <div class="bvd-q"><label class="bvd-lbl" for="bvd-prazo">Prazo para entrega <i>*</i></label><input type="date" id="bvd-prazo" name="prazo"><span class="bvd-hint" id="bvd-prazo-hint"></span></div>
+      </div>
+      <div class="bvd-q">
+        <span class="bvd-lbl" id="bvd-l-obj">Objetivo <i>*</i></span>
+        <div class="bvd-chips" role="radiogroup" aria-labelledby="bvd-l-obj" id="bvd-objetivos"></div>
+      </div>
+      <div class="bvd-urg" id="bvd-urg" hidden>
+        <label class="bvd-lbl" for="bvd-urgencia">O prazo está abaixo do mínimo. Por que é urgente? <i>*</i></label>
+        <textarea id="bvd-urgencia" name="urgencia" placeholder="Ex.: fornecedor liberou a tarifa hoje e a promoção vale só até sexta"></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset class="bvd-block">
+      <legend><span class="bvd-n">3</span> Conteúdo</legend>
+      <div class="bvd-q"><label class="bvd-lbl" for="bvd-mensagem">Mensagem principal <i>*</i></label><span class="bvd-hint">Em uma frase, o que o público precisa entender.</span><input type="text" id="bvd-mensagem" name="mensagem" maxlength="200"></div>
+      <div class="bvd-q"><label class="bvd-lbl" for="bvd-infos">Informações que têm que aparecer <i>*</i></label><span class="bvd-hint">Substitua os exemplos. O que não se aplicar, apague.</span>
+        <textarea class="bvd-tall" id="bvd-infos" name="infos">Destino:
+Datas da viagem:
+Preço "a partir de" e parcelamento:
+Validade da oferta:
+O que inclui:
+Link ou contato para reservar:
+Cuidados (termos proibidos, regras do fornecedor): </textarea></div>
+      <div class="bvd-q"><label class="bvd-lbl" for="bvd-anexos">Anexos e referências</label><span class="bvd-hint">Cole o link do OneDrive, WeTransfer ou Drive com a lâmina do fornecedor, fotos ou uma peça de referência.</span><input type="url" id="bvd-anexos" name="anexos" placeholder="https://"></div>
+      <div class="bvd-q">
+        <span class="bvd-lbl" id="bvd-l-verba">Tem verba ou fornecedor externo?</span>
+        <div class="bvd-chips" role="radiogroup" aria-labelledby="bvd-l-verba">
+          <label class="bvd-chip"><input type="radio" name="verba" id="bvd-verba-nao" value="Não" checked><span>Não</span></label>
+          <label class="bvd-chip"><input type="radio" name="verba" id="bvd-verba-midia" value="Sim, mídia paga"><span>Sim, mídia paga</span></label>
+          <label class="bvd-chip"><input type="radio" name="verba" id="bvd-verba-grafica" value="Sim, gráfica ou brinde"><span>Sim, gráfica ou brinde</span></label>
+          <label class="bvd-chip"><input type="radio" name="verba" id="bvd-verba-nsei" value="Não sei"><span>Não sei</span></label>
+        </div>
+        <span class="bvd-hint">Pedidos com verba passam pela aprovação do André antes de começar.</span>
+      </div>
+      <div class="bvd-hp" aria-hidden="true"><label for="bvd-site">Não preencha</label><input type="text" id="bvd-site" name="site" tabindex="-1" autocomplete="off"></div>
+    </fieldset>
+
+    <div class="bvd-actions">
+      <button type="submit" id="bvd-enviar">Enviar pedido</button>
+      <span class="bvd-status" id="bvd-status" role="status" aria-live="polite"></span>
+    </div>
+  </form>
+
+  <div class="bvd-done" id="bvd-done" hidden>
+    <h2>Pedido enviado</h2>
+    <p id="bvd-done-txt"></p>
+    <p><a id="bvd-card" href="#" target="_blank" rel="noopener" hidden>Abrir o card no Trello</a></p>
+    <div><button type="button" class="bvd-ghost" id="bvd-novo">Fazer outro pedido</button></div>
+  </div>
+</div>
+
+<script>
+/* CONFIGURAÇÃO: troque pelo endereço gerado pelo FormSubmit para o e-mail do quadro MARKETING no Trello */
+window.BVD_CFG={endpoint:"https://formsubmit.co/ajax/EMAIL_DO_QUADRO_TRELLO",ccVerba:"andre@bvgroup.com.br"};
+</script>
+<script>
+(function(){
+  var root=document.getElementById("bvd");if(!root)return;
+  var CFG=window.BVD_CFG||{};
+  var PECAS=["Post feed","Story / Reels","WhatsApp","E-mail marketing","Banner do site","Lâmina de oferta","Apresentação","Impresso para loja","Vídeo","Outro"];
+  var MEDIAS=["Lâmina de oferta","Apresentação","Impresso para loja","Vídeo"];
+  var OBJS=["Vender um produto ou destino","Divulgar promoção ou campanha","Engajar agentes","Evento","Marca / institucional","Comunicado"];
+  function $(s){return root.querySelector(s)}
+  function slug(s){return s.normalize("NFD").replace(/[^\w]+/g,"-").toLowerCase()}
+  function chip(name,type,v,i){var l=document.createElement("label");l.className="bvd-chip";var inp=document.createElement("input");inp.type=type;inp.name=name;inp.value=v;inp.id="bvd-"+name+"-"+i+"-"+slug(v);var sp=document.createElement("span");sp.textContent=v;l.appendChild(inp);l.appendChild(sp);return l}
+  PECAS.forEach(function(p,i){$("#bvd-pecas").appendChild(chip("pecas","checkbox",p,i))});
+  OBJS.forEach(function(o,i){$("#bvd-objetivos").appendChild(chip("objetivo","radio",o,i))});
+  var f=$("#bvd-form");
+  function val(n){var el=f.querySelector('input[name="'+n+'"]:checked');return el?el.value:""}
+  function many(n){return Array.prototype.map.call(f.querySelectorAll('input[name="'+n+'"]:checked'),function(i){return i.value})}
+  function minDias(){var t=val("tipo");if(t==="Campanha ou ação")return 10;if(t==="Ajuste em peça existente")return 2;if(many("pecas").some(function(p){return MEDIAS.indexOf(p)>-1}))return 5;return 2}
+  function addUteis(d,n){var r=new Date(d);while(n>0){r.setDate(r.getDate()+1);var w=r.getDay();if(w!==0&&w!==6)n--}return r}
+  function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+  function br(s){var p=s.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
+  function hoje(){var h=new Date();h.setHours(0,0,0,0);return h}
+  function abaixoMin(){var p=$("#bvd-prazo").value;return !!p&&p<iso(addUteis(hoje(),minDias()))}
+  function atualiza(){var m=minDias();$("#bvd-prazo").min=iso(hoje());$("#bvd-prazo-hint").textContent="Mínimo para este pedido: "+m+" dias úteis (a partir de "+br(iso(addUteis(hoje(),m)))+").";$("#bvd-urg").hidden=!abaixoMin()}
+  f.addEventListener("change",atualiza);$("#bvd-prazo").addEventListener("input",atualiza);atualiza();
+  var infosPadrao=$("#bvd-infos").value;
+  function erros(){var e=[];
+    if(!many("empresas").length)e.push("empresa");
+    if(!$("#bvd-nome").value.trim())e.push("nome");
+    if(!/^\S+@\S+\.\S+$/.test($("#bvd-email").value.trim()))e.push("e-mail");
+    if(!$("#bvd-titulo").value.trim())e.push("título");
+    if(!val("tipo"))e.push("tipo");
+    if(!many("pecas").length)e.push("peças e canais");
+    if(!val("comunicacao"))e.push("comunicação");
+    if(!$("#bvd-prazo").value)e.push("prazo");
+    if(!val("objetivo"))e.push("objetivo");
+    if(abaixoMin()&&!$("#bvd-urgencia").value.trim())e.push("motivo da urgência");
+    if(!$("#bvd-mensagem").value.trim())e.push("mensagem principal");
+    var inf=$("#bvd-infos").value.trim();if(!inf||inf===infosPadrao.trim())e.push("informações");
+    return e}
+  function status(t,err){var s=$("#bvd-status");s.textContent=t;s.className=err?"bvd-status bvd-err":"bvd-status"}
+  var enviando=false;
+  f.addEventListener("submit",function(ev){ev.preventDefault();if(enviando)return;
+    var e=erros();if(e.length){status("Falta preencher: "+e.join(", ")+".",true);return}
+    var data={empresas:many("empresas"),nome:$("#bvd-nome").value.trim(),email:$("#bvd-email").value.trim(),titulo:$("#bvd-titulo").value.trim(),
+      tipo:val("tipo"),pecas:many("pecas"),comunicacao:val("comunicacao"),prazo:$("#bvd-prazo").value,objetivo:val("objetivo"),
+      urgente:abaixoMin(),urgencia:abaixoMin()?$("#bvd-urgencia").value.trim():"",mensagem:$("#bvd-mensagem").value.trim(),
+      infos:$("#bvd-infos").value.trim(),anexos:$("#bvd-anexos").value.trim(),verba:val("verba")||"Não",site:$("#bvd-site").value};
+    enviando=true;$("#bvd-enviar").disabled=true;status("Enviando…");
+    var fim=function(){enviando=false;$("#bvd-enviar").disabled=false};
+    var ok=function(r){fim();f.hidden=true;$("#bvd-done").hidden=false;
+      $("#bvd-done-txt").textContent='"'+data.titulo+'" foi enviado. Em instantes ele aparece no Trello do Marketing, na lista Novas Solicitações.';
+      var a=$("#bvd-card");if(r&&r.url&&/^https:\/\/trello\.com\//.test(r.url)){a.href=r.url;a.hidden=false}else{a.hidden=true}
+      status("");root.scrollIntoView({behavior:"smooth",block:"start"})};
+    if(CFG.demo){setTimeout(function(){ok({})},600);return}
+    var LBL={"Snow":"SNOW","Primus":"PRIMUS","Azul Viagens":"AZUL_VIAGENS","BV Group":"BV_GROUP"};
+    var tags=data.empresas.map(function(e){return "#"+LBL[e]});if(data.urgente)tags.push("#PRIORIDADE");
+    var assunto="["+data.empresas.join(" + ").toUpperCase()+"] "+data.titulo+(data.verba!=="Não"?" · VERBA (aprovação André)":"")+" "+tags.join(" ");
+    var body={"_subject":assunto,"_template":"table","_captcha":"false","_honey":data.site,
+      "Mensagem principal":data.mensagem,"Empresa":data.empresas.join(", "),"Tipo":data.tipo,"Peças":data.pecas.join(", "),
+      "Comunicação":data.comunicacao,"Objetivo":data.objetivo,"Prazo para entrega":br(data.prazo)};
+    if(data.urgente)body["URGENTE"]=data.urgencia;
+    body["Verba / fornecedor externo"]=data.verba;body["Informações obrigatórias"]=data.infos;
+    if(data.anexos)body["Anexos"]=data.anexos;
+    body["Pedido por"]=data.nome+" ("+data.email+")";
+    if(data.verba!=="Não"&&CFG.ccVerba)body["_cc"]=CFG.ccVerba;
+    var ctrl=typeof AbortController!=="undefined"?new AbortController():null;var t=setTimeout(function(){if(ctrl)ctrl.abort()},20000);
+    fetch(CFG.endpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(body),signal:ctrl?ctrl.signal:undefined})
+      .then(function(res){return res.json().catch(function(){return {}}).then(function(j){return {ok:res.ok,j:j}})})
+      .then(function(r){clearTimeout(t);if(r.ok&&r.j&&(r.j.success===true||r.j.success==="true")){ok({})}else{fim();status("Não foi possível enviar agora. Tente de novo em instantes.",true)}})
+      .catch(function(){clearTimeout(t);fim();status("Não foi possível enviar. Confira a conexão e tente de novo.",true)});
+  });
+  $("#bvd-novo").addEventListener("click",function(){f.reset();$("#bvd-infos").value=infosPadrao;f.hidden=false;$("#bvd-done").hidden=true;atualiza()});
+})();
+
+</script>
+</body></html>
