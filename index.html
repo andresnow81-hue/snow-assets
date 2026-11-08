@@ -108,6 +108,7 @@
         <span class="bvd-lbl" id="bvd-l-pecas">Peças e canais <i>*</i></span>
         <span class="bvd-hint">Marque todas. Formatos e tamanhos o marketing resolve.</span>
         <div class="bvd-chips" role="group" aria-labelledby="bvd-l-pecas" id="bvd-pecas"></div>
+        <div class="bvd-q" id="bvd-outro-box" hidden><label class="bvd-lbl" for="bvd-outro">Qual é a outra peça ou canal? <i>*</i></label><input type="text" id="bvd-outro" name="outro" maxlength="200" placeholder="Ex.: crachá do evento, adesivo de vitrine, post no LinkedIn"></div>
       </div>
       <div class="bvd-row2">
         <div class="bvd-q">
@@ -187,13 +188,14 @@ window.BVD_CFG={endpoint:"https://script.google.com/macros/s/AKfycbxl6f1yewD38Ay
   var f=$("#bvd-form");
   function val(n){var el=f.querySelector('input[name="'+n+'"]:checked');return el?el.value:""}
   function many(n){return Array.prototype.map.call(f.querySelectorAll('input[name="'+n+'"]:checked'),function(i){return i.value})}
+  function temOutro(){return many("pecas").indexOf("Outro")>-1}
   function minDias(){var t=val("tipo");if(t==="Campanha ou ação")return 10;if(t==="Ajuste em peça existente")return 2;if(many("pecas").some(function(p){return MEDIAS.indexOf(p)>-1}))return 5;return 2}
   function addUteis(d,n){var r=new Date(d);while(n>0){r.setDate(r.getDate()+1);var w=r.getDay();if(w!==0&&w!==6)n--}return r}
   function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
   function br(s){var p=s.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
   function hoje(){var h=new Date();h.setHours(0,0,0,0);return h}
   function abaixoMin(){var p=$("#bvd-prazo").value;return !!p&&p<iso(addUteis(hoje(),minDias()))}
-  function atualiza(){var m=minDias();$("#bvd-prazo").min=iso(hoje());$("#bvd-prazo-hint").textContent="Mínimo para este pedido: "+m+" dias úteis (a partir de "+br(iso(addUteis(hoje(),m)))+").";$("#bvd-urg").hidden=!abaixoMin()}
+  function atualiza(){var m=minDias();$("#bvd-prazo").min=iso(hoje());$("#bvd-prazo-hint").textContent="Mínimo para este pedido: "+m+" dias úteis (a partir de "+br(iso(addUteis(hoje(),m)))+").";$("#bvd-urg").hidden=!abaixoMin();$("#bvd-outro-box").hidden=!temOutro()}
   f.addEventListener("change",atualiza);$("#bvd-prazo").addEventListener("input",atualiza);atualiza();
   var infosPadrao=$("#bvd-infos").value;
   function erros(){var e=[];
@@ -203,6 +205,7 @@ window.BVD_CFG={endpoint:"https://script.google.com/macros/s/AKfycbxl6f1yewD38Ay
     if(!$("#bvd-titulo").value.trim())e.push("título");
     if(!val("tipo"))e.push("tipo");
     if(!many("pecas").length)e.push("peças e canais");
+    if(temOutro()&&!$("#bvd-outro").value.trim())e.push("qual é a outra peça");
     if(!val("comunicacao"))e.push("comunicação");
     if(!$("#bvd-prazo").value)e.push("prazo");
     if(!val("objetivo"))e.push("objetivo");
@@ -217,7 +220,7 @@ window.BVD_CFG={endpoint:"https://script.google.com/macros/s/AKfycbxl6f1yewD38Ay
     var data={empresas:many("empresas"),nome:$("#bvd-nome").value.trim(),email:$("#bvd-email").value.trim(),titulo:$("#bvd-titulo").value.trim(),
       tipo:val("tipo"),pecas:many("pecas"),comunicacao:val("comunicacao"),prazo:$("#bvd-prazo").value,objetivo:val("objetivo"),
       urgente:abaixoMin(),urgencia:abaixoMin()?$("#bvd-urgencia").value.trim():"",mensagem:$("#bvd-mensagem").value.trim(),
-      infos:$("#bvd-infos").value.trim(),anexos:$("#bvd-anexos").value.trim(),verba:val("verba")||"Não",site:$("#bvd-site").value};
+      infos:(temOutro()?"Outra peça ou canal: "+$("#bvd-outro").value.trim()+"\n\n":"")+$("#bvd-infos").value.trim(),anexos:$("#bvd-anexos").value.trim(),verba:val("verba")||"Não",site:$("#bvd-site").value};
     enviando=true;$("#bvd-enviar").disabled=true;status("Enviando…");
     var fim=function(){enviando=false;$("#bvd-enviar").disabled=false};
     var ok=function(r){fim();f.hidden=true;$("#bvd-done").hidden=false;
