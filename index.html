@@ -118,14 +118,23 @@
             <label class="bvd-chip"><input type="radio" name="comunicacao" id="bvd-com-interna" value="Interna"><span>Interna</span></label>
           </div>
         </div>
-        <div class="bvd-q"><label class="bvd-lbl" for="bvd-prazo">Prazo para entrega <i>*</i></label><input type="date" id="bvd-prazo" name="prazo"><span class="bvd-hint" id="bvd-prazo-hint"></span></div>
+        <div class="bvd-q"><label class="bvd-lbl" for="bvd-prazo">Data desejada <i>*</i></label><input type="date" id="bvd-prazo" name="prazo"><span class="bvd-hint" id="bvd-prazo-hint"></span></div>
+      </div>
+      <div class="bvd-q">
+        <span class="bvd-lbl" id="bvd-l-prio">Prioridade <i>*</i></span>
+        <span class="bvd-hint">A data de entrega final é definida pelo marketing na triagem, de acordo com a pauta.</span>
+        <div class="bvd-chips" role="radiogroup" aria-labelledby="bvd-l-prio">
+          <label class="bvd-chip"><input type="radio" name="prioridade" id="bvd-prio-normal" value="Normal"><span>Normal</span></label>
+          <label class="bvd-chip"><input type="radio" name="prioridade" id="bvd-prio-alta" value="Alta"><span>Alta</span></label>
+          <label class="bvd-chip"><input type="radio" name="prioridade" id="bvd-prio-urgente" value="Urgente"><span>Urgente</span></label>
+        </div>
       </div>
       <div class="bvd-q">
         <span class="bvd-lbl" id="bvd-l-obj">Objetivo <i>*</i></span>
         <div class="bvd-chips" role="radiogroup" aria-labelledby="bvd-l-obj" id="bvd-objetivos"></div>
       </div>
       <div class="bvd-urg" id="bvd-urg" hidden>
-        <label class="bvd-lbl" for="bvd-urgencia">O prazo está abaixo do mínimo. Por que é urgente? <i>*</i></label>
+        <label class="bvd-lbl" for="bvd-urgencia"><span id="bvd-urg-lbl">Por que é urgente?</span> <i>*</i></label>
         <textarea id="bvd-urgencia" name="urgencia" placeholder="Ex.: fornecedor liberou a tarifa hoje e a promoção vale só até sexta"></textarea>
       </div>
     </fieldset>
@@ -194,8 +203,9 @@ window.BVD_CFG={endpoint:"https://script.google.com/macros/s/AKfycbxl6f1yewD38Ay
   function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
   function br(s){var p=s.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
   function hoje(){var h=new Date();h.setHours(0,0,0,0);return h}
+  function urgente(){return val("prioridade")==="Urgente"||abaixoMin()}
   function abaixoMin(){var p=$("#bvd-prazo").value;return !!p&&p<iso(addUteis(hoje(),minDias()))}
-  function atualiza(){var m=minDias();$("#bvd-prazo").min=iso(hoje());$("#bvd-prazo-hint").textContent="Mínimo para este pedido: "+m+" dias úteis (a partir de "+br(iso(addUteis(hoje(),m)))+").";$("#bvd-urg").hidden=!abaixoMin();$("#bvd-outro-box").hidden=!temOutro()}
+  function atualiza(){var m=minDias();$("#bvd-prazo").min=iso(hoje());$("#bvd-prazo-hint").textContent="Mínimo para este pedido: "+m+" dias úteis (a partir de "+br(iso(addUteis(hoje(),m)))+").";$("#bvd-urg").hidden=!urgente();$("#bvd-urg-lbl").textContent=abaixoMin()?"A data está abaixo do prazo mínimo. Por que é urgente?":"Por que é urgente?";$("#bvd-outro-box").hidden=!temOutro()}
   f.addEventListener("change",atualiza);$("#bvd-prazo").addEventListener("input",atualiza);atualiza();
   var infosPadrao=$("#bvd-infos").value;
   function erros(){var e=[];
@@ -207,9 +217,10 @@ window.BVD_CFG={endpoint:"https://script.google.com/macros/s/AKfycbxl6f1yewD38Ay
     if(!many("pecas").length)e.push("peças e canais");
     if(temOutro()&&!$("#bvd-outro").value.trim())e.push("qual é a outra peça");
     if(!val("comunicacao"))e.push("comunicação");
-    if(!$("#bvd-prazo").value)e.push("prazo");
+    if(!$("#bvd-prazo").value)e.push("data desejada");
+    if(!val("prioridade"))e.push("prioridade");
     if(!val("objetivo"))e.push("objetivo");
-    if(abaixoMin()&&!$("#bvd-urgencia").value.trim())e.push("motivo da urgência");
+    if(urgente()&&!$("#bvd-urgencia").value.trim())e.push("motivo da urgência");
     if(!$("#bvd-mensagem").value.trim())e.push("mensagem principal");
     var inf=$("#bvd-infos").value.trim();if(!inf||inf===infosPadrao.trim())e.push("informações");
     return e}
@@ -219,7 +230,7 @@ window.BVD_CFG={endpoint:"https://script.google.com/macros/s/AKfycbxl6f1yewD38Ay
     var e=erros();if(e.length){status("Falta preencher: "+e.join(", ")+".",true);return}
     var data={empresas:many("empresas"),nome:$("#bvd-nome").value.trim(),email:$("#bvd-email").value.trim(),titulo:$("#bvd-titulo").value.trim(),
       tipo:val("tipo"),pecas:many("pecas"),comunicacao:val("comunicacao"),prazo:$("#bvd-prazo").value,objetivo:val("objetivo"),
-      urgente:abaixoMin(),urgencia:abaixoMin()?$("#bvd-urgencia").value.trim():"",mensagem:$("#bvd-mensagem").value.trim(),
+      prioridade:val("prioridade"),urgente:urgente(),urgencia:urgente()?$("#bvd-urgencia").value.trim():"",mensagem:$("#bvd-mensagem").value.trim(),
       infos:(temOutro()?"Outra peça ou canal: "+$("#bvd-outro").value.trim()+"\n\n":"")+$("#bvd-infos").value.trim(),anexos:$("#bvd-anexos").value.trim(),verba:val("verba")||"Não",site:$("#bvd-site").value};
     enviando=true;$("#bvd-enviar").disabled=true;status("Enviando…");
     var fim=function(){enviando=false;$("#bvd-enviar").disabled=false};

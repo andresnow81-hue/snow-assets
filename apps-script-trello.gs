@@ -23,6 +23,7 @@ const PECAS = ['Post feed', 'Story / Reels', 'WhatsApp', 'E-mail marketing', 'Ba
 const COMS = ['Cliente', 'Interna'];
 const OBJS = ['Vender um produto ou destino', 'Divulgar promoção ou campanha', 'Engajar agentes', 'Evento', 'Marca / institucional', 'Comunicado'];
 const VERBAS = ['Não', 'Sim, mídia paga', 'Sim, gráfica ou brinde', 'Não sei'];
+const PRIORIDADES = ['Normal', 'Alta', 'Urgente'];
 
 function resposta(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
@@ -52,7 +53,8 @@ function doPost(e) {
     const pecas = lista(d.pecas, PECAS);
     const tipo = um(d.tipo, TIPOS), com = um(d.comunicacao, COMS), obj = um(d.objetivo, OBJS), verba = um(d.verba, VERBAS, 'Não');
     const nome = txt(d.nome, 120), email = txt(d.email, 160), titulo = txt(d.titulo, 120), mensagem = txt(d.mensagem, 200);
-    const infos = txt(d.infos, 4000), urgente = d.urgente === true, urgencia = txt(d.urgencia, 1000);
+    const prioridade = um(d.prioridade, PRIORIDADES, 'Normal');
+    const infos = txt(d.infos, 4000), urgente = d.urgente === true || prioridade === 'Urgente', urgencia = txt(d.urgencia, 1000);
     const prazo = /^\d{4}-\d{2}-\d{2}$/.test(d.prazo || '') ? d.prazo : '';
     const anexos = /^https?:\/\/\S+$/.test(txt(d.anexos, 1000)) ? txt(d.anexos, 1000) : '';
 
@@ -70,7 +72,8 @@ function doPost(e) {
       '**Peças:** ' + pecas.join(', '),
       '**Comunicação:** ' + com,
       '**Objetivo:** ' + obj,
-      '**Prazo:** ' + prazoBr
+      '**Data desejada:** ' + prazoBr + ' (a data de entrega é definida na triagem)',
+      '**Prioridade:** ' + prioridade
     ];
     if (urgente) l.push('**URGENTE:** ' + urgencia);
     l.push('**Verba / fornecedor externo:** ' + verba, '', '**Informações obrigatórias:**', infos);
@@ -85,7 +88,7 @@ function doPost(e) {
       muteHttpExceptions: true,
       payload: {
         key: key, token: token, idList: LISTA, pos: 'top',
-        name: nomeCard, desc: l.join('\n'), due: prazo + 'T15:00:00.000Z', idLabels: etiquetas.join(',')
+        name: nomeCard, desc: l.join('\n'), idLabels: etiquetas.join(',')
       }
     });
     const code = r.getResponseCode();
@@ -98,7 +101,7 @@ function doPost(e) {
 
     if (verba !== 'Não') {
       MailApp.sendEmail(AVISO_VERBA, 'Aprovar verba: ' + nomeCard,
-        'Novo pedido com verba ou fornecedor externo.\n\n' + nomeCard + '\nPedido por ' + nome + ' (' + email + ')\nPrazo: ' + prazoBr + '\n\nCard: ' + url);
+        'Novo pedido com verba ou fornecedor externo.\n\n' + nomeCard + '\nPedido por ' + nome + ' (' + email + ')\nData desejada: ' + prazoBr + ' · Prioridade: ' + prioridade + '\n\nCard: ' + url);
     }
     return resposta({ ok: true, url: url });
   } catch (err) {
